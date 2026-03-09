@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skillbee Futurelab | AI Engineering Mentorship</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+    <style>
+
+        #home {
+            position: relative;
+            overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background-image: url('./images/hero-bg.jpeg'); 
+            background-size: cover;
+            background-position: right center; 
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            z-index: 1;
+        }
+
+        #home::after {
+            content: ''; 
+            position: absolute; 
+            inset: 0;
+            background: linear-gradient(to right, 
+                rgba(253, 252, 248, 1) 0%, 
+                rgba(253, 252, 248, 0.95) 25%, 
+                rgba(253, 252, 248, 0) 60%
+            );
+            z-index: 2; 
+            pointer-events: none;
+        }
+
+        #home > div { 
+            position: relative; 
+            z-index: 3;
+            max-width: 550px; 
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade { animation: fadeIn 0.8s ease-out forwards; }
+    </style>
+</head>
+<body class="antialiased">
+
+    <nav class="fixed top-0 left-0 w-full z-50 px-8 py-5 flex justify-between items-center bg-white/80 border-b border-slate-100 backdrop-blur-xl">
+        <div class="leading-none select-none cursor-pointer flex flex-col group" onclick="window.scrollTo(0,0)">
+            <span class="text-[9px] uppercase tracking-[0.4em] text-slate-400 font-bold mb-1 transition-colors group-hover:text-white">SkillBee</span>
+            <span class="text-[26px] font-extrabold tracking-tighter text-[#0B3C5D] leading-none">Future<span class="text-[#00E0C6]">Lab</span></span>
+        </div>
+
+        <div class="flex items-center space-x-10">
+            <div class="hidden lg:flex space-x-8 text-[10px] font-bold uppercase tracking-[0.2em] text-[#0B3C5D]/60">
+                <a href="#about" class="hover:text-[#0B3C5D] transition">About</a>
+                <a href="#what-we-do" class="hover:text-[#0B3C5D] transition">What We Do</a> 
+                <a href="#why-us" class="hover:text-[#0B3C5D] transition">Why Us?</a> 
+                <a href="#vision" class="hover:text-[#0B3C5D] transition">Vision</a> 
+            </div>
+
+            <button onclick="openCourses()" class="group flex items-center text-[10px] font-bold uppercase tracking-widest text-[#0B3C5D] border border-[#0B3C5D]/10 px-5 py-2.5 rounded-full hover:bg-slate-50 transition-all">
+                <span>Courses</span>
+            </button>
+
+            <button onclick="openModal()" class="bg-[#0B3C5D] text-white px-7 py-2.5 rounded-full text-[10px] font-bold uppercase tracking-widest hover:bg-[#00E0C6] transition-all shadow-md">
+                Enroll Now
+            </button>
+        </div>
+    </nav>
+
+    <main>
+        <section id="home">
+            <div class="px-8 md:px-24 animate-fade">
+                <div class="flex items-center gap-3 mb-8">
+                    <div class="w-10 h-[1px] bg-[#00E0C6]"></div>
+                </div>
+                
+                <h1 class="text-4xl md:text-7xl font-extrabold leading-[1.05] mb-8 tracking-tighter hero-title">
+                    AI <br> <span class="hero-title-accent uppercase">Evolved.</span>
+                </h1>
+                
+                <p class="text-slate-500 text-lg md:text-xl max-w-xl mb-12 leading-relaxed font-medium">
+                    The premier hub for industry-grade AI engineering. Master tomorrow's technology, taught by the engineers building it today.
+                </p>
+
+                <div class="flex flex-wrap gap-6">
+                    <button onclick="openModal()" class="bg-[#0B3C5D] text-white px-10 py-5 rounded-full font-bold uppercase text-[11px] tracking-widest hover:bg-[#00E0C6] transition-all shadow-xl shadow-[#0B3C5D]/20">
+                        Enroll Now
+                    </button>
+                    <button onclick="openCourses()" class="glass-panel text-[#0B3C5D] px-10 py-5 rounded-full font-bold uppercase text-[11px] tracking-widest hover:bg-white transition-all">
+                        Courses
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="min-h-screen flex flex-col items-center justify-center px-8 md:px-24 bg-[#FDFCF8] text-[#0B3C5D] border-y border-slate-100">
+            <div class="max-w-5xl w-full text-center mb-16">
+                <h2 class="text-[11px] uppercase tracking-[0.4em] text-[#00E0C6] font-extrabold mb-4">Skillbee Futurelab</h2>
+                <h1 class="text-5xl md:text-7xl font-extrabold leading-tight tracking-tighter">
+                    We are delighted <br> to describe <span id="animated-text" class="text-[#00E0C6]"></span><span class="cursor">|</span>
+                </h1>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12 max-w-7xl w-full items-center">
+                <div class="space-y-6 border-l-2 border-[#00E0C6]/30 pl-8">
+                    <h3 class="text-2xl font-bold">You need a <span class="text-[#00E0C6]">Skill Specialist?</span></h3>
+                    <p class="text-[#0B3C5D]/80 leading-relaxed text-lg">
+                    Skillbee Futurelab is a premier AI-driven educational hub based in Kottakkal, Malappuram, founded and operated entirely by AI Engineers. Unlike traditional academies, our classes are conducted by engineers who bring real-world technical depth to every session. At the heart of Kerala’s tech evolution, we aim to empower the next generation of innovators with the skills that truly matter.
+                    <p class="text-[#0B3C5D]/80 leading-relaxed">
+                        We bridge the gap between theory and execution, making elite AI knowledge accessible to the local community.
+                    </p>
+                    <button onclick="window.location.href='about-details.html'" class="mt-4 bg-black text-white px-8 py-4 text-xs font-bold uppercase tracking-widest hover:bg-[#00E0C6] transition-all">
+                        About Us
+                    </button>
+                </div>
+
+                <div class="relative h-[400px] bg-white rounded-sm overflow-hidden flex items-center justify-center border border-slate-100 shadow-sm">
+                     <span class="text-slate-300 font-medium italic text-sm text-center px-4">[ Insert Team/Lab Image Here ]</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="what-we-do" class="py-24 px-8 md:px-24 bg-white">
+    <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+            <h2 class="text-5xl font-extrabold text-[#0B3C5D] tracking-tight">
+                <span class="text-[#00E0C6]">What</span> We do
+            </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+            
+            <div class="bg-white p-10 flex gap-6 rounded-lg shadow-[0_10px_40px_rgba(0,0,0,0.06)] border border-slate-50 transition-transform hover:-translate-y-1">
+                <div class="w-16 h-16 bg-[#00E0C6] rounded-full flex items-center justify-center shrink-0">
+                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.364-5.636l-.707-.707m12.728 0l-.707.707M6.364 17.636l-.707.707M12 21v-1m0-5a5 5 0 110-10 5 5 0 010 10z"/>
+                    </svg>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-3 text-[#0B3C5D]">AI Engineering Labs</h3>
+                    <p class="text-slate-500 text-sm mb-4 leading-relaxed">
+                        We provide curriculum-grade engineering skills. Students are equipped to solve real problems; teachers are trained to integrate AI logic into classrooms.
+                    </p>
+                    <a href="service-lab.html" class="text-xs font-bold uppercase tracking-widest text-[#0B3C5D] hover:text-[#00E0C6] transition">READ MORE →</a>
+                </div>
+            </div>
+
+            <div class="bg-white p-10 flex gap-6 rounded-lg shadow-[0_10px_40px_rgba(0,0,0,0.06)] border border-slate-50 transition-transform hover:-translate-y-1">
+                <div class="w-16 h-16 bg-[#00E0C6] rounded-full flex items-center justify-center shrink-0">
+                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                    </svg>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-3 text-[#0B3C5D]">Mentorship Programs</h3>
+                    <p class="text-slate-500 text-sm mb-4 leading-relaxed">
+                        Direct one-on-one engineering mentorship. We foster a community of lifelong innovators ready for the future of work by bridging the gap between theory and execution.
+                    </p>
+                    <a href="service-mentorship.html" class="text-xs font-bold uppercase tracking-widest text-[#0B3C5D] hover:text-[#00E0C6] transition">READ MORE →</a>
+                </div>
+            </div>
+
+            <div class="bg-white p-10 flex gap-6 rounded-lg shadow-[0_10px_40px_rgba(0,0,0,0.06)] border border-slate-50 transition-transform hover:-translate-y-1">
+                <div class="w-16 h-16 bg-[#00E0C6] rounded-full flex items-center justify-center shrink-0">
+                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+                    </svg>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-3 text-[#0B3C5D]">Custom AI Agents</h3>
+                    <p class="text-slate-500 text-sm mb-4 leading-relaxed">
+                        We develop and train specialized AI agents for workflow automation. From automated lesson planning for teachers to smart grading bots, we build tools that execute tasks with precision.
+                    </p>
+                    <a href="service-agents.html" class="text-xs font-bold uppercase tracking-widest text-[#0B3C5D] hover:text-[#00E0C6] transition">READ MORE →</a>
+                </div>
+            </div>
+
+            <div class="bg-white p-10 flex gap-6 rounded-lg shadow-[0_10px_40px_rgba(0,0,0,0.06)] border border-slate-50 transition-transform hover:-translate-y-1">
+                <div class="w-16 h-16 bg-[#00E0C6] rounded-full flex items-center justify-center shrink-0">
+                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                    </svg>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-3 text-[#0B3C5D]">Future-Ready Workshops</h3>
+                    <p class="text-slate-500 text-sm mb-4 leading-relaxed">
+                        Our platform in Kottakkal, Malappuram provides workshops designed for all ages, focusing on Prompt Engineering and AI Tool Mastering.
+                    </p>
+                    <a href="service-workshops.html" class="text-xs font-bold uppercase tracking-widest text-[#0B3C5D] hover:text-[#00E0C6] transition">READ MORE →</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+        <section id="why-us" class="min-h-screen flex items-center px-8 md:px-24 bg-[#FDFCF8] border-t border-slate-100">
+    <div class="max-w-7xl mx-auto w-full">
+        <div class="text-center mb-16">
+            <h2 class="text-5xl font-extrabold text-[#0B3C5D] tracking-tight">
+                Why <span class="text-[#00E0C6]">Us?</span>
+            </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+            
+            <div class="bg-white p-10 rounded-xl shadow-[0_10px_40px_rgba(0,0,0,0.06)] border border-slate-50 transition-transform hover:-translate-y-2 group">
+                <div class="w-14 h-14 bg-[#00E0C6]/10 rounded-lg flex items-center justify-center mb-6 group-hover:bg-[#00E0C6] transition-colors">
+                    <svg class="w-7 h-7 text-[#00E0C6] group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/>
+                    </svg>
+                </div>
+                <h3 class="font-bold text-xl mb-4 text-[#0B3C5D]">Live Labs</h3>
+                <p class="text-slate-500 text-sm leading-relaxed">
+                    Build, optimize, and deploy AI models in our high-performance sandbox environments.
+                </p>
+            </div>
+
+            <div class="bg-white p-10 rounded-xl shadow-[0_10px_40px_rgba(0,0,0,0.06)] border border-slate-50 transition-transform hover:-translate-y-2 group">
+                <div class="w-14 h-14 bg-[#00E0C6]/10 rounded-lg flex items-center justify-center mb-6 group-hover:bg-[#00E0C6] transition-colors">
+                    <svg class="w-7 h-7 text-[#00E0C6] group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+                    </svg>
+                </div>
+                <h3 class="font-bold text-xl mb-4 text-[#0B3C5D]">Tool Stack</h3>
+                <p class="text-slate-500 text-sm leading-relaxed">
+                    Master LangChain, PyTorch, and Gen-AI automation tools used by Silicon Valley engineers.
+                </p>
+            </div>
+
+            <div class="bg-white p-10 rounded-xl shadow-[0_10px_40px_rgba(0,0,0,0.06)] border border-slate-50 transition-transform hover:-translate-y-2 group">
+                <div class="w-14 h-14 bg-[#00E0C6]/10 rounded-lg flex items-center justify-center mb-6 group-hover:bg-[#00E0C6] transition-colors">
+                    <svg class="w-7 h-7 text-[#00E0C6] group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                    </svg>
+                </div>
+                <h3 class="font-bold text-xl mb-4 text-[#0B3C5D]">Certification</h3>
+                <p class="text-slate-500 text-sm leading-relaxed">
+                    Earn an industry-recognized certificate backed by a portfolio of real AI deployments.
+                </p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+       <section id="vision" class="min-h-screen flex items-center px-8 md:px-24 bg-white border-t border-slate-100">
+    <div class="max-w-7xl mx-auto text-center w-full">
+        
+        <div class="mb-20">
+            <h2 class="text-5xl font-extrabold mb-8 text-[#0B3C5D] tracking-tight">The <span class="text-[#00E0C6]">Vision</span></h2>
+            <p class="text-2xl text-slate-500 leading-relaxed max-w-3xl mx-auto font-light">
+            To be the definitive catalyst for AI integration in Kerala, transforming Skillbee Futurelab into a center of excellence where engineering expertise meets educational innovation. We envision a future where students and educators are empowered with technical mastery, fostering a generation of digital leaders capable of navigating and shaping the global AI landscape.
+            </p>
+        </div>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+            
+            <div class="p-12 bg-white rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.06)] border border-slate-50 hover:border-[#00E0C6] transition-all group flex flex-col items-center justify-center min-h-[220px]">
+                <div class="text-[10px] uppercase tracking-[0.4em] text-slate-400 font-bold mb-6">Pillar 01</div>
+                <h3 class="font-extrabold text-xl text-[#0B3C5D] uppercase tracking-widest group-hover:text-[#00E0C6] transition-colors">Research</h3>
+            </div>
+
+            <div class="p-12 bg-white rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.06)] border border-slate-50 hover:border-[#00E0C6] transition-all group flex flex-col items-center justify-center min-h-[220px]">
+                <div class="text-[10px] uppercase tracking-[0.4em] text-slate-400 font-bold mb-6">Pillar 02</div>
+                <h3 class="font-extrabold text-xl text-[#0B3C5D] uppercase tracking-widest group-hover:text-[#00E0C6] transition-colors">Ethics</h3>
+            </div>
+
+            <div class="p-12 bg-white rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.06)] border border-slate-50 hover:border-[#00E0C6] transition-all group flex flex-col items-center justify-center min-h-[220px]">
+                <div class="text-[10px] uppercase tracking-[0.4em] text-slate-400 font-bold mb-6">Pillar 03</div>
+                <h3 class="font-extrabold text-xl text-[#0B3C5D] uppercase tracking-widest group-hover:text-[#00E0C6] transition-colors">Scalability</h3>
+            </div>
+
+            <div class="p-12 bg-white rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.06)] border border-slate-50 hover:border-[#00E0C6] transition-all group flex flex-col items-center justify-center min-h-[220px]">
+                <div class="text-[10px] uppercase tracking-[0.4em] text-slate-400 font-bold mb-6">Pillar 04</div>
+                <h3 class="font-extrabold text-xl text-[#0B3C5D] uppercase tracking-widest group-hover:text-[#00E0C6] transition-colors">Innovation</h3>
+            </div>
+
+        </div>
+    </div>
+</section>
+</main>
+
+
+    <footer class="bg-white border-t border-slate-100 py-12 px-8 md:px-24">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+            <div class="flex flex-col group cursor-pointer" onclick="window.scrollTo(0,0)">
+                <span class="text-[8px] uppercase tracking-[0.4em] text-slate-400 font-bold mb-1">SkillBee</span>
+                            <span class="text-[26px] font-extrabold tracking-tighter text-[#0B3C5D] leading-none">Future<span class="text-[#00E0C6]">Lab</span></span>
+
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-16 text-sm">
+                <div>
+                    <h4 class="font-bold uppercase tracking-widest text-[10px] mb-4 text-[#0B3C5D]/40">Location</h4>
+                    <p class="text-slate-500 font-medium">Skillbee Futurelab<br>Kottakkal, Malappuram<br>Kerala, India</p>
+                </div>
+                <div>
+                    <h4 class="font-bold uppercase tracking-widest text-[10px] mb-4 text-[#0B3C5D]/40">Contact</h4>
+                    <p class="text-slate-500 font-medium">+91 79072 87563<br>Support Available</p>
+                </div>
+                <div>
+                    <h4 class="font-bold uppercase tracking-widest text-[10px] mb-4 text-[#0B3C5D]/40">Legal</h4>
+                    <a href="#" class="text-slate-400 hover:text-[#00E0C6] block text-[10px]">Privacy Policy</a>
+                    <p class="text-slate-400 text-[10px] mt-2">© 2026 Skillbee Futurelab</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div id="coursesOverlay" class="fixed inset-0 z-[110] hidden bg-[#FDFCF8] p-8 md:p-24 overflow-y-auto">
+        <button onclick="closeCourses()" class="absolute top-10 right-10 text-slate-400 hover:text-[#0B3C5D] transition group">
+            <span class="text-xs font-bold uppercase tracking-widest mr-2">Exit</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 inline group-hover:rotate-90 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+        </button>
+        <div class="max-w-7xl mx-auto">
+            <div class="mb-16"><h2 class="text-5xl md:text-7xl font-extrabold text-[#0B3C5D]">Our <span class="text-[#00E0C6]">Courses</span></h2></div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="glass-panel p-10 rounded-3xl hover:bg-white transition-all group">
+                    <div class="text-[#00E0C6] font-bold text-[10px] uppercase tracking-widest mb-6 ">30 Days</div>
+                    <h3 class="text-2xl font-bold mb-6 text-[#0B3C5D]">AI for Teachers</h3>
+                    <ul class="space-y-4 mb-10 text-slate-500 text-sm">
+                        <li><span class="text-[#00E0C6] mr-2">▹</span>Automated Lesson Logic</li>
+                        <li><span class="text-[#00E0C6] mr-2">▹</span>Smart Grading Systems</li>
+                    </ul>
+                    <button onclick="openModal()" class="w-full border border-[#0B3C5D]/20 py-4 rounded-full font-bold uppercase tracking-widest text-[10px] hover:bg-[#0B3C5D] hover:text-white transition-all text-[#0B3C5D]">Enroll Now</button>
+                </div>
+                <div class="glass-panel p-10 rounded-3xl hover:bg-white transition-all group">
+                    <div class="text-[#00E0C6] font-bold text-[10px] uppercase tracking-widest mb-6 ">21 Days</div>
+                    <h3 class="text-2xl font-bold mb-6 text-[#0B3C5D]">Prompt Engineering</h3>
+                    <ul class="space-y-4 mb-10 text-slate-500 text-sm">
+                        <li><span class="text-[#00E0C6] mr-2">▹</span>Context Mastery</li>
+                        <li><span class="text-[#00E0C6] mr-2">▹</span>Custom Agents</li>
+                    </ul>
+                    <button onclick="openModal()" class="w-full border border-[#0B3C5D]/20 py-4 rounded-full font-bold uppercase tracking-widest text-[10px] hover:bg-[#0B3C5D] hover:text-white transition-all text-[#0B3C5D]">Enroll Now</button>
+                </div>
+                <div class="glass-panel p-10 rounded-3xl hover:bg-white transition-all group">
+                    <div class="text-[#00E0C6] font-bold text-[10px] uppercase tracking-widest mb-6 ">21 Days</div>
+                    <h3 class="text-2xl font-bold mb-6 text-[#0B3C5D]">AI Tools Mastering</h3>
+                    <ul class="space-y-4 mb-10 text-slate-500 text-sm">
+                        <li><span class="text-[#00E0C6] mr-2">▹</span>Workflow Automation</li>
+                        <li><span class="text-[#00E0C6] mr-2">▹</span>Gen-AI Stack</li>
+                    </ul>
+                    <button onclick="openModal()" class="w-full border border-[#0B3C5D]/20 py-4 rounded-full font-bold uppercase tracking-widest text-[10px] hover:bg-[#0B3C5D] hover:text-white transition-all text-[#0B3C5D]">Enroll Now</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="registrationModal" class="fixed inset-0 z-[120] hidden items-center justify-center bg-slate-900/40 backdrop-blur-md p-4">
+        <div class="bg-white w-full max-w-lg rounded-3xl shadow-2xl relative p-10">
+            <button onclick="closeModal()" class="absolute top-6 right-6 text-slate-400 hover:text-slate-900 transition"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg></button>
+            <h3 class="text-2xl font-extrabold uppercase tracking-widest mb-8 text-center text-[#0B3C5D]">Join the Lab</h3>
+            <form class="space-y-5">
+                <input type="text" placeholder="Full Name" class="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-xl outline-none text-slate-900 text-sm">
+                <input type="tel" placeholder="Contact Number" class="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-xl outline-none text-slate-900 text-sm">
+                <select class="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-xl outline-none text-slate-600 text-sm appearance-none">
+                    <option>Select Program</option>
+                    <option>AI for Teachers</option>
+                    <option>Prompt Engineering</option>
+                    <option>AI Tools Mastering</option>
+                </select>
+                <button type="submit" class="w-full bg-[#0B3C5D] text-white font-bold py-4 rounded-xl hover:bg-[#00E0C6] transition-all uppercase tracking-widest text-xs">Submit Application</button>
+            </form>
+        </div>
+    </div>
+
+    <button onclick="toggleChat()" class="fixed bottom-8 right-8 z-[130] bg-white border border-slate-100 text-[#0B3C5D] px-6 py-4 rounded-full shadow-lg flex items-center gap-3 font-bold hover:scale-105 transition-all duration-300"><div class="w-2 h-2 bg-[#00E0C6] rounded-full animate-pulse"></div><span class="text-[10px] uppercase tracking-widest">AI Terminal</span></button>
+
+    <div id="aiChatBot" class="fixed bottom-28 right-8 w-[350px] h-[500px] z-[130] hidden flex-col bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-xl">
+        <div class="p-5 bg-slate-50 flex justify-between items-center border-b border-slate-100"><span class="text-[10px] font-bold uppercase tracking-widest text-[#00E0C6]">Futurelab Agent</span><button onclick="toggleChat()" class="text-slate-400 hover:text-slate-900 transition"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M20 12H4" /></svg></button></div>
+        <div id="chatMessages" class="flex-1 p-6 overflow-y-auto flex flex-col gap-4 text-xs text-slate-600"></div>
+        <div class="p-4 bg-white border-t border-slate-100"><div class="relative"><input type="text" id="userInput" placeholder="Ask anything..." class="w-full bg-slate-50 border border-slate-100 rounded-full py-3 px-5 text-slate-900 text-xs outline-none focus:border-[#00E0C6]"></div></div>
+    </div>
+
+    <script>
+
+function openCourses() { document.getElementById('coursesOverlay').classList.remove('hidden'); document.body.classList.add('no-scroll'); }
+function closeCourses() { document.getElementById('coursesOverlay').classList.add('hidden'); document.body.classList.remove('no-scroll'); }
+function openModal() { document.getElementById('registrationModal').classList.remove('hidden'); document.getElementById('registrationModal').classList.add('flex'); document.body.classList.add('no-scroll'); }
+function closeModal() { document.getElementById('registrationModal').classList.add('hidden'); document.getElementById('registrationModal').classList.remove('flex'); document.body.classList.remove('no-scroll'); }
+
+
+const futurelabData = {
+    "about": "Skillbee Futurelab is an engineering-led lab where education meets execution, bridging the gap between theory and industry-grade AI engineering.",
+    "courses": "We currently offer three specialized programs: 1. AI for Teachers, 2. Prompt Engineering, and 3. AI Tools Mastering.",
+    "teachers": {
+        "desc": "Our 'AI for Teachers' program is a 30-day course focusing on lesson planning, grading automation, and personalized learning paths.",
+        "link": "javascript:void(0);\" onclick=\"openModal()"
+    },
+    "prompt": {
+        "desc": "The Prompt Engineering workshop (21 days) covers LLM context mastery, Zero-shot, Chain-of-thought, and building custom agents.",
+        "link": "javascript:void(0);\" onclick=\"openModal()"
+    },
+    "tools": {
+        "desc": "AI Tools Mastering (21 days) focuses on workflow automation (Zapier/Make), generative video/audio, and business integration.",
+        "link": "javascript:void(0);\" onclick=\"openModal()"
+    }
+};
+
+let isChatInitialised = false;
+
+function toggleChat() {
+    const chat = document.getElementById('aiChatBot');
+    chat.classList.toggle('hidden');
+    chat.classList.toggle('flex');
+    
+    if (!isChatInitialised && !chat.classList.contains('hidden')) {
+        typeBotMessage("Hello! I am your SkillBee Agent. I'm here to help you explore our AI programs or connect you with our engineering team.");
+        isChatInitialised = true;
+    }
+}
+
+async function sendMessage() {
+    const input = document.getElementById('userInput');
+    const container = document.getElementById('chatMessages');
+    const message = input.value.trim().toLowerCase();
+    
+    if (message === "") return;
+    const userDiv = document.createElement('div');
+    userDiv.className = "bg-[#00E0C6] text-[#0B3C5D] p-4 rounded-lg self-end max-w-[85%] font-medium shadow-sm mb-2";
+    userDiv.innerText = input.value;
+    container.appendChild(userDiv);
+    input.value = "";
+    container.scrollTop = container.scrollHeight;
+    const thinkingIndicator = document.createElement('div');
+    thinkingIndicator.className = "text-white/30 italic text-[10px] ml-2 mb-2 animate-pulse";
+    thinkingIndicator.innerText = "Agent is thinking...";
+    container.appendChild(thinkingIndicator);
+    container.scrollTop = container.scrollHeight;
+
+    await new Promise(resolve => setTimeout(resolve, 400)); 
+    thinkingIndicator.remove();
+    let response = "";
+    if (message.includes("about") || message.includes("who are you")) {
+        response = futurelabData.about;
+    } else if (message.includes("teacher")) {
+        response = `${futurelabData.teachers.desc} <br><br> <a href='${futurelabData.teachers.link}' class='text-[#00E0C6] font-bold underline'>Enroll in AI for Teachers here.</a>`;
+    } else if (message.includes("prompt")) {
+        response = `${futurelabData.prompt.desc} <br><br> <a href='${futurelabData.prompt.link}' class='text-[#00E0C6] font-bold underline'>Start Prompt Engineering.</a>`;
+    } else if (message.includes("tool") || message.includes("mastering")) {
+        response = `${futurelabData.tools.desc} <br><br> <a href='${futurelabData.tools.link}' class='text-[#00E0C6] font-bold underline'>Master AI Tools now.</a>`;
+    } else if (message.includes("course") || message.includes("program")) {
+        response = futurelabData.courses + " Which specific one would you like to explore?";
+    } else {
+        response = "I'm specifically trained on Skillbee Futurelab programs. Ask me about our AI courses for Teachers, Prompt Engineering, or Automation tools!";
+    }
+
+    // 4. Trigger the Typing Effect
+    await typeBotMessage(response);
+}
+
+async function typeBotMessage(html) {
+    const container = document.getElementById('chatMessages');
+    const botDiv = document.createElement('div');
+    botDiv.className = "bg-[#FDFCF8] text-black p-4 rounded-lg self-start max-w-[85%] mb-2 shadow-md typing whitespace-pre-wrap break-words";
+    container.appendChild(botDiv);
+
+    const temp = document.createElement('div');
+    temp.innerHTML = html;
+    const plainText = temp.innerText;
+    for (let i = 0; i < plainText.length; i++) {
+        botDiv.innerText += plainText[i];
+        container.scrollTop = container.scrollHeight;
+        await new Promise(resolve => setTimeout(resolve, 10)); 
+    }
+
+    botDiv.classList.remove('typing');
+    botDiv.innerHTML = html;
+    container.scrollTop = container.scrollHeight;
+}
+document.getElementById('userInput').addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') sendMessage();
+});
+        const textElement = document.getElementById("animated-text");
+        const phrases = ["About Us", "What We Do"];
+        let pIdx = 0, cIdx = 0, isDel = false;
+        function typeEffect() {
+            const full = phrases[pIdx];
+            textElement.innerText = isDel ? full.substring(0, cIdx--) : full.substring(0, cIdx++);
+            let speed = isDel ? 50 : 150;
+            if (!isDel && cIdx === full.length + 1) { isDel = true; speed = 2000; }
+            else if (isDel && cIdx === 0) { isDel = false; pIdx = (pIdx + 1) % phrases.length; speed = 500; }
+            setTimeout(typeEffect, speed);
+        }
+        document.addEventListener("DOMContentLoaded", typeEffect);
+    </script>
+</body>
+</html>
